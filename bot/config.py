@@ -1,0 +1,3 @@
+TOKEN = "851373716:AAGyNXo7ktpdmDY1NRvIETXPnMicC7XTQqo"
+
+BASE = "bot_shop"
