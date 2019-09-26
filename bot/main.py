@@ -7,7 +7,7 @@ from telebot.types import (
     ReplyKeyboardMarkup)
 
 import flask
-import flask.request.headers
+from flask import request
 
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
@@ -41,7 +41,7 @@ bot_messages = list()
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
-   if headers.get('content-type') == 'application/json':
+   if request.headers.get('content-type') == 'application/json':
        json_string = flask.request.get_data().decode('utf-8')
        update = telebot.types.Update.de_json(json_string)
        bot.process_new_updates([update])
