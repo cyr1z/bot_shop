@@ -8,6 +8,7 @@ from telebot.types import (
 
 import flask
 from flask import request
+import time
 
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
@@ -32,6 +33,9 @@ WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (TOKEN)
 
 bot = telebot.TeleBot(TOKEN)
+remove.webhook()
+time.sleep(1)
+
 bot.set_webhook(url=WEBHOOK_URL_BASE+WEBHOOK_URL_PATH,
                certificate=open(WEBHOOK_SSL_CERT, 'r'))
 app = flask.Flask(__name__)
@@ -278,3 +282,5 @@ if __name__ == "__main__":
             port=WEBHOOK_PORT,
             ssl_context=(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV),
             debug=True)
+
+
