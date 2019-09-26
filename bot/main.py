@@ -26,8 +26,8 @@ from models.cats_and_products import(
 WEBHOOK_HOST = '34.90.152.51'
 WEBHOOK_PORT = 8443 # доступны только 443, 80, 88, 8443
 WEBHOOK_LISTEN = '34.90.152.51'
-WEBHOOK_SSL_CERT = 'bot/webhook_cert.pem'  # SSL-сертификат
-WEBHOOK_SSL_PRIV = 'bot/webhook_pkey.pem'  # Приватный ключ
+WEBHOOK_SSL_CERT = 'webhook_cert.pem'  # SSL-сертификат
+WEBHOOK_SSL_PRIV = 'webhook_pkey.pem'  # Приватный ключ
 WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (TOKEN)
 
