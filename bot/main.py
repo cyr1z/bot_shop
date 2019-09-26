@@ -273,7 +273,7 @@ def rep_keyboard(message):
 
 
 if __name__ == "__main__":
-    # bot.polling()
+    bot.polling()
     app.run(host=WEBHOOK_LISTEN,
             port=WEBHOOK_PORT,
             ssl_context=(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV),
