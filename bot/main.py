@@ -6,9 +6,12 @@ from telebot.types import (
     InlineKeyboardMarkup,
     ReplyKeyboardMarkup)
 
-from bot.utils import get_lang
-from bot.config import TOKEN, BASE
-from bot.words import WORDS
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+from utils import get_lang
+from config import TOKEN, BASE
+from words import WORDS
 from models.user_model import User
 from models.cats_and_products import(
     Category,
