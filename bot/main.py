@@ -24,7 +24,7 @@ from models.cats_and_products import(
     Cart,
     OrdersHistory)
 
-WEBHOOK_HOST = '34.90.152.51'
+WEBHOOK_HOST = '34.90.133.83'
 WEBHOOK_PORT = 80 # доступны только 443, 80, 88, 8443
 WEBHOOK_LISTEN = '0.0.0.0'
 WEBHOOK_SSL_CERT = 'webhook_cert.pem'  # SSL-сертификат
