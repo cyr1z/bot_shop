@@ -6,6 +6,9 @@ from telebot.types import (
     InlineKeyboardMarkup,
     ReplyKeyboardMarkup)
 
+import flask
+import flask.request.headers
+
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
@@ -20,10 +23,29 @@ from models.cats_and_products import(
     Cart,
     OrdersHistory)
 
+WEBHOOK_HOST = '34.90.152.51'
+WEBHOOK_PORT = 8443 # доступны только 443, 80, 88, 8443
+WEBHOOK_LISTEN = '0.0.0.0'
+WEBHOOK_SSL_CERT = './webhook_cert.pem'  # SSL-сертификат
+WEBHOOK_SSL_PRIV = './webhook_pkey.pem'  # Приватный ключ
+WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
+WEBHOOK_URL_PATH = "/%s/" % (TOKEN)
+
 bot = telebot.TeleBot(TOKEN)
+bot.set_webhook(url=WEBHOOK_URL_BASE+WEBHOOK_URL_PATH,
+               certificate=open(WEBHOOK_SSL_CERT, 'r'))
+app = flask.Flask(__name__)
 connect(BASE)
 
 bot_messages = list()
+
+@app.route(WEBHOOK_URL_PATH, methods=['POST'])
+def webhook():
+   if headers.get('content-type') == 'application/json':
+       json_string = flask.request.get_data().decode('utf-8')
+       update = telebot.types.Update.de_json(json_string)
+       bot.process_new_updates([update])
+       return ''
 
 
 @bot.message_handler(commands=['start'])
@@ -251,4 +273,8 @@ def rep_keyboard(message):
 
 
 if __name__ == "__main__":
-    bot.polling()
+    # bot.polling()
+    app.run(host=WEBHOOK_LISTEN,
+            port=WEBHOOK_PORT,
+            ssl_context=(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV),
+            debug=True)
