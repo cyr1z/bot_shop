@@ -33,9 +33,8 @@ WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (TOKEN)
 
 bot = telebot.TeleBot(TOKEN)
-remove.webhook()
+bot.remove_webhook()
 time.sleep(1)
-
 bot.set_webhook(url=WEBHOOK_URL_BASE+WEBHOOK_URL_PATH,
                certificate=open(WEBHOOK_SSL_CERT, 'r'))
 app = flask.Flask(__name__)
